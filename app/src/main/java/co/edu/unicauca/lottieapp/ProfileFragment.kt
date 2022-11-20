@@ -1,5 +1,6 @@
 package co.edu.unicauca.lottieapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +22,15 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.profileFragmentButton.setOnClickListener {
+            val intent = Intent(requireContext(),LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 
 }
