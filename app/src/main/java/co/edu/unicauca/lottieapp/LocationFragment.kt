@@ -51,7 +51,7 @@ class LocationFragment : Fragment() {
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8030/api/")
+            .baseUrl("http://192.168.128.3:8030/api/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
