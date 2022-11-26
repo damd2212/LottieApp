@@ -19,7 +19,14 @@
         android:id="@+id/qrFragment"
         android:name="co.edu.unicauca.lottieapp.QrFragment"
         android:label="@string/title_toolbar_qr"
-        tools:layout="@layout/fragment_qr" />
+        tools:layout="@layout/fragment_qr" >
+        <action
+            android:id="@+id/action_qrFragment_to_locationFragment"
+            app:destination="@id/locationFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/locationFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="co.edu.unicauca.lottieapp.ProfileFragment"

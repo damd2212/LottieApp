@@ -17,4 +17,5 @@
     <string name="title_toolbar_search">Buscar</string>
     <string name="title_toolbar_qr">Escanear</string>
     <string name="title_toolbar_profile">Perfil</string>
+    <string name="label_btn_qr">Escanear cancha</string>
 </resources>
