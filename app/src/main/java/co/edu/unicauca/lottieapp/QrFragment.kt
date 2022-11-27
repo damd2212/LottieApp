@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 
 import co.edu.unicauca.lottieapp.databinding.FragmentQrBinding
@@ -52,6 +54,8 @@ class QrFragment : Fragment() {
                 findNavController().navigate(R.id.action_qrFragment_to_locationFragment)
             }else{
                 Toast.makeText(getActivity(), "Valor escaneado: ${result.contents}", Toast.LENGTH_SHORT).show();
+                setFragmentResult("key", bundleOf("idescenario" to result.contents))
+                findNavController().navigate(R.id.action_qrFragment_to_infoQrFragment)
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data)

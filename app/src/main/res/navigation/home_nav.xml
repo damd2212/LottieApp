@@ -26,10 +26,18 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/locationFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_qrFragment_to_infoQrFragment"
+            app:destination="@id/infoQrFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="co.edu.unicauca.lottieapp.ProfileFragment"
         android:label="@string/title_toolbar_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/infoQrFragment"
+        android:name="co.edu.unicauca.lottieapp.InfoQrFragment"
+        android:label="fragment_info_qr"
+        tools:layout="@layout/fragment_info_qr" />
 </navigation>

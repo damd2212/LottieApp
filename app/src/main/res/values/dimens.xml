@@ -10,4 +10,6 @@
     <dimen name="corner_size_lg">5dp</dimen>
     <dimen name="button_text_size">12sp</dimen>
     <dimen name="margin_arriba_forgot">1dp</dimen>
+    <dimen name="margin_info_qr">10dp</dimen>
+    <dimen name="size_label_qr">15dp</dimen>
 </resources>
