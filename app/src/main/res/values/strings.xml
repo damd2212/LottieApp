@@ -18,4 +18,7 @@
     <string name="title_toolbar_qr">Escanear</string>
     <string name="title_toolbar_profile">Perfil</string>
     <string name="label_btn_qr">Escanear cancha</string>
+    <string name="title_item_category_location">Popayán - Cauca</string>
+    <string name="txt_search_locate">Buscar Ubicación</string>
+    <string name="btn_watch_escenarios">ESCENARIOS DEPORTIVOS</string>
 </resources>
