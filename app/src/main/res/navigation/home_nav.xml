@@ -9,7 +9,14 @@
         android:id="@+id/locationFragment"
         android:name="co.edu.unicauca.lottieapp.LocationFragment"
         android:label="@string/title_toolbar_home"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_locationFragment_to_escenarioFragment"
+            app:destination="@id/escenarioFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_infoCategoriaFragment"
+            app:destination="@id/infoCategoriaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="co.edu.unicauca.lottieapp.SearchFragment"
@@ -40,4 +47,32 @@
         android:name="co.edu.unicauca.lottieapp.InfoQrFragment"
         android:label="fragment_info_qr"
         tools:layout="@layout/fragment_info_qr" />
+    <fragment
+        android:id="@+id/escenarioFragment"
+        android:name="co.edu.unicauca.lottieapp.EscenarioFragment"
+        android:label="Escenarios">
+        <action
+            android:id="@+id/action_escenarioFragment_to_infoEscenarioFragment"
+            app:destination="@id/infoEscenarioFragment" />
+        <argument
+            android:name="ubicacion"
+            app:argType="co.edu.unicauca.lottieapp.models.categoriaResponse" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoCategoriaFragment"
+        android:name="co.edu.unicauca.lottieapp.InfoCategoriaFragment"
+        android:label="Información Ubicación"
+        tools:layout="@layout/fragment_info_categoria">
+        <argument
+            android:name="categoria"
+            app:argType="co.edu.unicauca.lottieapp.models.categoriaResponse" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoEscenarioFragment"
+        android:name="co.edu.unicauca.lottieapp.InfoEscenarioFragment"
+        android:label="Información Escenario"
+        tools:layout="@layout/fragment_info_escenario" />
 </navigation>

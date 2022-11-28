@@ -21,4 +21,6 @@
     <string name="title_item_category_location">Popayán - Cauca</string>
     <string name="txt_search_locate">Buscar Ubicación</string>
     <string name="btn_watch_escenarios">ESCENARIOS DEPORTIVOS</string>
+    <string name="btn_watch_reservar">Reservar</string>
+    <string name="txt_search_escenario">Buscar Escenario</string>
 </resources>
