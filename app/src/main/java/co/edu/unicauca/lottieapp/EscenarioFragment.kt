@@ -54,7 +54,7 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.0.21:8030/api/")
+            .baseUrl("http://192.168.128.3:8030/api/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -99,8 +99,8 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
         if(!newText.isNullOrEmpty() || !newText.isNullOrBlank()){
             searchByID(newText.toUpperCase())
         }else{
-            //adapter.categorias = categorias
-            //adapter.notifyDataSetChanged()
+            adapter.escenarios = escenarios
+            adapter.notifyDataSetChanged()
         }
         return true
     }

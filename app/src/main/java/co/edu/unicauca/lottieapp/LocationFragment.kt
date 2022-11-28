@@ -62,7 +62,7 @@ class LocationFragment : Fragment(),OnQueryTextListener,CategoriaAdapter.OnUserC
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.0.21:8030/api/")
+            .baseUrl("http://192.168.128.3:8030/api/")
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
