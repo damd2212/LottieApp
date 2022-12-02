@@ -45,8 +45,12 @@
     <fragment
         android:id="@+id/infoQrFragment"
         android:name="co.edu.unicauca.lottieapp.InfoQrFragment"
-        android:label="fragment_info_qr"
-        tools:layout="@layout/fragment_info_qr" />
+        android:label="Informacion de la busqueda"
+        tools:layout="@layout/fragment_info_qr">
+        <action
+            android:id="@+id/action_infoQrFragment_to_qrFragment"
+            app:destination="@id/qrFragment" />
+    </fragment>
     <fragment
         android:id="@+id/escenarioFragment"
         android:name="co.edu.unicauca.lottieapp.EscenarioFragment"

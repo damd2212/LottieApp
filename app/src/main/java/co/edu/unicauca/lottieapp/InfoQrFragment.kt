@@ -1,12 +1,21 @@
 package co.edu.unicauca.lottieapp
 
+import android.app.ActionBar
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.lottieapp.databinding.FragmentInfoQrBinding
+import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.service.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,24 +30,44 @@ class InfoQrFragment : Fragment() {
 
     private val binding: FragmentInfoQrBinding get() = _binding!!
 
+    var ayuda: String? = "-1"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentInfoQrBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //bundle = savedInstanceState
+        /*if (bundle.getBundle("id") != null){
 
-        setFragmentResultListener("key"){ requestKey, bundle ->
-            val result = bundle.getString("idescenario")
-            binding.titleInfoQr.text = result
-            searchByID(result)
+        }*/
+        println("---------------------")
+        println("Instancia")
+        println(savedInstanceState)
+        println("---------------------")
 
+        if (savedInstanceState != null){
+            /*println("--------------------------")
+            var nom_esc = savedInstanceState.getString("id")
+            println("Valor encontrado $nom_esc")
+            println("-----------------------------")
+            searchByID(nom_esc)*/
+
+            findNavController().navigate(R.id.action_infoQrFragment_to_qrFragment)
+        }else{
+            setFragmentResultListener("key"){ requestKey, bundle ->
+                val result = bundle.getString("idescenario")
+                searchByID(result)
+            }
         }
+
     }
 
     private fun getRetrofit():Retrofit{
@@ -54,16 +83,49 @@ class InfoQrFragment : Fragment() {
             getActivity()?.runOnUiThread {
                 if (call.isSuccessful){
                     println(escenario?.esc_descripcion)
-                    binding.descriptionInfoQr.text = escenario?.esc_descripcion
-                }else{
-                    println("Error en la llamda de la api")
+                    ayuda = escenario?.esc_nombre
+                    //bundle?.putString("id",escenario?.esc_nombre)
+                    imprimirDatos(escenario)
 
+
+                }else{
+                    Toast.makeText(activity,"Erro en el servidor",Toast.LENGTH_SHORT)
                 }
             }
 
         }
 
     }
+
+    private fun imprimirDatos( prmEscenario : escenarioResponse?){
+        if (prmEscenario?.esc_nombre == "-1"){
+            binding.titleInfoQr.text = "Escenario no encontrado"
+            binding.imageInfoQr.setImageResource(R.drawable.nodisponible)
+        }else{
+
+            binding.titleInfoQr.text = prmEscenario?.esc_nombre
+            val imageBytes = Base64.decode(prmEscenario?.esc_foto, Base64.DEFAULT)
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.size)
+            binding.imageInfoQr.setImageBitmap(decodedImage)
+            binding.stateInfoQr.text = prmEscenario?.esc_estado
+            binding.descriptionInfoQr.text = prmEscenario?.esc_descripcion
+        }
+    }
+
+    /*override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("id",ayuda)
+        outState.putString("android:view_state","")
+        super.onSaveInstanceState(outState)
+
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+
+        super.onViewStateRestored(savedInstanceState)
+        val prueba : String? = savedInstanceState?.getString("id")
+
+    }*/
+
 
 
 
