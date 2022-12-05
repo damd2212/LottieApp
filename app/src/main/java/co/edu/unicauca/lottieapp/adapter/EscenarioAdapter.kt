@@ -1,8 +1,6 @@
 package co.edu.unicauca.lottieapp.adapter
 
-import android.content.Context
-import android.graphics.BitmapFactory
-import android.util.Base64
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.unicauca.lottieapp.R
 import co.edu.unicauca.lottieapp.databinding.ItemEscenarioBinding
 import co.edu.unicauca.lottieapp.models.escenarioResponse
+import co.edu.unicauca.lottieapp.service.Imagenes
 
 class EscenarioAdapter(var escenarios:List<escenarioResponse>, val itemClickListener: EscenarioAdapter.OnUserClickListener): RecyclerView.Adapter<BaseViewHolder<*>>(){
 
@@ -36,18 +35,23 @@ class EscenarioAdapter(var escenarios:List<escenarioResponse>, val itemClickList
         private val binding = ItemEscenarioBinding.bind(view)
 
         override fun bind(escenario: escenarioResponse, position: Int){
+            //val imageBytes = Base64.decode(escenario.esc_foto, Base64.DEFAULT)
+            //val decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.size)
+            //binding.escenarioPhoto.setImageBitmap(decodedImage)
+
+            val description = if (escenario.esc_descripcion.length >= 80) escenario.esc_descripcion.substring(0,80)+" <u><b>ver más...</b></u>" else escenario.esc_descripcion
 
             binding.escenarioName.text = escenario.esc_nombre
+            binding.escenarioPhoto.setImageResource(Imagenes.images[escenario.esc_nombre].hashCode())
+            binding.escenarioDescription.text = Html.fromHtml("${description}")
 
-
-            val imageBytes = Base64.decode(escenario.esc_foto, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.size)
-            binding.escenarioPhoto.setImageBitmap(decodedImage)
-
-            binding.escenarioDescription.text = escenario.esc_descripcion
             view.setOnClickListener{itemClickListener.onImageClick(escenario)}
             binding.btnEscenarioReservar.setOnClickListener{itemClickListener.onItemClick(escenario)}
 
+        }
+
+        private fun description(description: String){
+            description.substring(1,30)
         }
     }
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import co.edu.unicauca.lottieapp.databinding.ActivityHomeBinding
 import co.edu.unicauca.lottieapp.databinding.FragmentInfoCategoriaBinding
 import co.edu.unicauca.lottieapp.models.categoriaResponse
+import co.edu.unicauca.lottieapp.service.Imagenes
 
 
 /**
@@ -42,6 +43,10 @@ class InfoCategoriaFragment : Fragment() {
     }
 
     private fun showInfoLocation(){
+        binding.infoLocationName.text = categoria.name
+        binding.infoLocationDescription.text = categoria.description
+        binding.infoLocationPhoto.setImageResource(Imagenes.images[categoria.name].hashCode())
+        /*
         val imageId: ImageView = binding.root.findViewById(R.id.info_location_photo)
         val description =  binding.root.findViewById<TextView>(R.id.info_location_description)
         val name =  binding.root.findViewById<TextView>(R.id.info_location_name)
@@ -50,6 +55,8 @@ class InfoCategoriaFragment : Fragment() {
         imageId.setImageBitmap(decodedImage)
         name.text=categoria.name
         description.text=categoria.description
+
+         */
     }
 
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import co.edu.unicauca.lottieapp.databinding.FragmentInfoEscenarioBinding
 import co.edu.unicauca.lottieapp.models.escenarioResponse
+import co.edu.unicauca.lottieapp.service.Imagenes
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +41,11 @@ class InfoEscenarioFragment : Fragment() {
     }
 
     private fun showInfoEscenario() {
+        binding.infoEscenarioName.text = escenario.esc_nombre
+        binding.infoEscenarioPhoto.setImageResource(Imagenes.images[escenario.esc_nombre].hashCode())
+        binding.infoEscenarioDescription.text = escenario.esc_descripcion
+
+        /*
         val imageId: ImageView = binding.root.findViewById(R.id.info_escenario_photo)
         val description =  binding.root.findViewById<TextView>(R.id.info_escenario_description)
         val name =  binding.root.findViewById<TextView>(R.id.info_escenario_name)
@@ -48,6 +54,8 @@ class InfoEscenarioFragment : Fragment() {
         imageId.setImageBitmap(decodedImage)
         name.text=escenario.esc_nombre
         description.text=escenario.esc_descripcion
+
+         */
     }
 
 
