@@ -7,8 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.lottieapp.databinding.FragmentLoginBinding
+import co.edu.unicauca.lottieapp.repository.Resource
+import co.edu.unicauca.lottieapp.repository.UserRepository
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -16,6 +20,7 @@ class LoginFragment : Fragment() {
     private var _binding:FragmentLoginBinding? = null
 
     private val binding:FragmentLoginBinding get() = _binding!!
+    private val userRepository by lazy { UserRepository() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +47,20 @@ class LoginFragment : Fragment() {
             }
 
             if (binding.loginEmail.text.toString().isValidEmail() && binding.loginPassword.text.toString().isValidPassword()){
-                val intent = Intent(requireContext(),HomeActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+
+                lifecycleScope.launch {
+                    val result = userRepository.login(binding.loginEmail.text.toString(),binding.loginPassword.text.toString())
+                    when(result){
+                        is Resource.Error -> Toast.makeText(requireContext(),"Error ${result.message}", Toast.LENGTH_LONG).show()
+                        is Resource.Loading -> {}
+                        is Resource.Success -> {
+                            val intent = Intent(requireContext(),HomeActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
+                    }
+                }
             }
-
-
         }
 
         binding.fragmentLoginLabel2.setOnClickListener{

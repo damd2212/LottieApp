@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "872962063556",
+    "project_id": "unireservasapp",
+    "storage_bucket": "unireservasapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872962063556:android:cb3f3cdf9669a1037edd91",
+        "android_client_info": {
+          "package_name": "co.edu.unicauca.lottieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872962063556-ba2drt5ikmnk9tfkpac2jnbvvt3oik17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLchq6ZaoWaQAahOyTvL93YljQ78disao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872962063556-ba2drt5ikmnk9tfkpac2jnbvvt3oik17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
