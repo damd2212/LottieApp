@@ -54,7 +54,7 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.20.76:8030/api/")
+            .baseUrl(Constants.URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
