@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.lottieapp.databinding.FragmentInfoQrBinding
 import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.service.APIService
+import co.edu.unicauca.lottieapp.service.Imagenes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,22 +45,7 @@ class InfoQrFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //bundle = savedInstanceState
-        /*if (bundle.getBundle("id") != null){
-
-        }*/
-        println("---------------------")
-        println("Instancia")
-        println(savedInstanceState)
-        println("---------------------")
-
         if (savedInstanceState != null){
-            /*println("--------------------------")
-            var nom_esc = savedInstanceState.getString("id")
-            println("Valor encontrado $nom_esc")
-            println("-----------------------------")
-            searchByID(nom_esc)*/
-
             findNavController().navigate(R.id.action_infoQrFragment_to_qrFragment)
         }else{
             setFragmentResultListener("key"){ requestKey, bundle ->
@@ -67,11 +53,10 @@ class InfoQrFragment : Fragment() {
                 searchByID(result)
             }
         }
-
     }
 
     private fun getRetrofit():Retrofit{
-        return Retrofit.Builder().baseUrl("http://192.168.128.3:8030/api/")
+        return Retrofit.Builder().baseUrl(Constants.URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
@@ -84,10 +69,7 @@ class InfoQrFragment : Fragment() {
                 if (call.isSuccessful){
                     println(escenario?.esc_descripcion)
                     ayuda = escenario?.esc_nombre
-                    //bundle?.putString("id",escenario?.esc_nombre)
                     imprimirDatos(escenario)
-
-
                 }else{
                     Toast.makeText(activity,"Erro en el servidor",Toast.LENGTH_SHORT)
                 }
@@ -102,31 +84,11 @@ class InfoQrFragment : Fragment() {
             binding.titleInfoQr.text = "Escenario no encontrado"
             binding.imageInfoQr.setImageResource(R.drawable.nodisponible)
         }else{
-
+            binding.imageInfoQr.setImageResource(Imagenes.images[prmEscenario?.esc_nombre].hashCode())
             binding.titleInfoQr.text = prmEscenario?.esc_nombre
-            val imageBytes = Base64.decode(prmEscenario?.esc_foto, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.size)
-            binding.imageInfoQr.setImageBitmap(decodedImage)
             binding.stateInfoQr.text = prmEscenario?.esc_estado
             binding.descriptionInfoQr.text = prmEscenario?.esc_descripcion
         }
     }
-
-    /*override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString("id",ayuda)
-        outState.putString("android:view_state","")
-        super.onSaveInstanceState(outState)
-
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-
-        super.onViewStateRestored(savedInstanceState)
-        val prueba : String? = savedInstanceState?.getString("id")
-
-    }*/
-
-
-
 
 }
