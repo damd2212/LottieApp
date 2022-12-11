@@ -9,12 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.setFragmentResultListener
 import co.edu.unicauca.calendarweekview.adapter.CalendarAdapter
 import co.edu.unicauca.calendarweekview.weekViewModel
 import co.edu.unicauca.lottieapp.databinding.FragmentCalendarReservasBinding
 import com.alamkanak.weekview.WeekView
 import java.time.format.DateTimeFormatter
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
+import co.edu.unicauca.calendarweekview.models.MyEvent
+import co.edu.unicauca.calendarweekview.models.toCalendar
 import co.edu.unicauca.lottieapp.adapter.EscenarioAdapter
 import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.models.eventosResponse
@@ -55,10 +60,15 @@ class CalendarReservasFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val weekView: WeekView = binding.weekView
-
         weekView.adapter = adapt
-        if(eventos.isEmpty())
-            buscarEventos("CANCHA BALONCESTO 1")
+        setFragmentResultListener("keyEsc"){ requestKey, bundle ->
+            val auxresult = bundle.getString("idescenariores")!!
+            if(eventos.isEmpty()) {
+                buscarEventos(auxresult)
+            }
+        }
+
+
     }
 
     private fun getRetrofit(): Retrofit {
@@ -69,7 +79,6 @@ class CalendarReservasFragment : Fragment() {
 
 
     private fun buscarEventos(query: String) {
-
         CoroutineScope(Dispatchers.IO).launch {
 
             val call = getRetrofit().create(APIService::class.java).getHorariosByEscenario("horarios/escenario/${query}")
@@ -81,6 +90,17 @@ class CalendarReservasFragment : Fragment() {
                     eventos.addAll(listaEventos)
                     for (evento in listaEventos){
                         println("eventos :"+evento.pk_horario)
+                    }
+                    var listaEventos : List<MyEvent> = listOf(MyEvent(
+                        1,
+                        "evento modificado",
+                        toCalendar("2022-12-12T09:00"),
+                        toCalendar("2022-12-12T10:00")
+                    ));
+                    var eventodds: MutableLiveData<List<MyEvent>>? = MutableLiveData()
+                    eventodds?.value = listaEventos
+                    if (eventodds != null) {
+                        viewModel.eventos = eventodds
                     }
                     viewModel.eventos.observe(this@CalendarReservasFragment) {events ->
                         adapt.submitList(events)

@@ -16,32 +16,32 @@ data class MyEvent(
                 MyEvent(
                     1,
                     "evento 1",
-                    toCalendar("2022-12-10T09:00"),
-                    toCalendar("2022-12-10T10:00")
+                    toCalendar("2022-12-12T09:00"),
+                    toCalendar("2022-12-12T10:00")
                 ),
                 MyEvent(
                     2,
                     "evento 2",
-                    toCalendar("2022-12-05T11:00"),
-                    toCalendar("2022-12-05T13:00")
+                    toCalendar("2022-12-13T11:00"),
+                    toCalendar("2022-12-13T13:00")
                 ),
                 MyEvent(
                     3,
                     "evento 3",
-                    toCalendar("2022-12-06T14:00"),
-                    toCalendar("2022-12-06T15:00")
+                    toCalendar("2022-12-15T14:00"),
+                    toCalendar("2022-12-15T15:00")
                 ),
                 MyEvent(
                     4,
                     "evento 4",
-                    toCalendar("2022-11-24T08:00"),
-                    toCalendar("2022-11-24T09:00")
+                    toCalendar("2022-11-17T08:00"),
+                    toCalendar("2022-11-17T09:00")
                 ),
                 MyEvent(
                     5,
                     "evento 5",
-                    toCalendar("2022-11-26T09:00"),
-                    toCalendar("2022-11-26T10:00")
+                    toCalendar("2022-11-16T09:00"),
+                    toCalendar("2022-11-16T10:00")
                 )
             )
 
