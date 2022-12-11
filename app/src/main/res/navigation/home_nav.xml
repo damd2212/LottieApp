@@ -64,6 +64,9 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_escenarioFragment_to_calendarReservasFragment"
+            app:destination="@id/calendarReservasFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoCategoriaFragment"
@@ -79,4 +82,12 @@
         android:name="co.edu.unicauca.lottieapp.InfoEscenarioFragment"
         android:label="Información Escenario"
         tools:layout="@layout/fragment_info_escenario" />
+    <fragment
+        android:id="@+id/calendarReservasFragment"
+        android:name="co.edu.unicauca.lottieapp.CalendarReservasFragment"
+        android:label="CalendarReservasFragment" >
+        <action
+            android:id="@+id/action_calendarReservasFragment_to_escenarioFragment"
+            app:destination="@id/escenarioFragment" />
+    </fragment>
 </navigation>

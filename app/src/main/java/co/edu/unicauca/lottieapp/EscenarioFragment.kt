@@ -79,8 +79,6 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
             }
 
         }
-
-
     }
 
     private fun showError() {
@@ -128,6 +126,6 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
     }
 
     override fun onItemClick(escenario: escenarioResponse) {
-        Toast.makeText(activity, "Reservación en construcción", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_escenarioFragment_to_calendarReservasFragment)
     }
 }

@@ -2,6 +2,7 @@ package co.edu.unicauca.lottieapp.service
 
 import co.edu.unicauca.lottieapp.models.categoriaResponse
 import co.edu.unicauca.lottieapp.models.escenarioResponse
+import co.edu.unicauca.lottieapp.models.eventosResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -16,4 +17,7 @@ interface APIService {
 
     @GET
     suspend fun getCategorias(@Url url: String): Response<List<categoriaResponse>>
+
+    @GET
+    suspend fun getHorariosByEscenario(@Url url:String): Response<List<eventosResponse>>
 }
