@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.edu.unicauca.lottieapp.adapter.EscenarioAdapter
@@ -79,8 +80,6 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
             }
 
         }
-
-
     }
 
     private fun showError() {
@@ -128,6 +127,7 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
     }
 
     override fun onItemClick(escenario: escenarioResponse) {
-        Toast.makeText(activity, "Reservación en construcción", Toast.LENGTH_SHORT).show()
+        setFragmentResult("keyEsc", bundleOf("idescenariores" to escenario.esc_nombre))
+        findNavController().navigate(R.id.action_escenarioFragment_to_calendarReservasFragment)
     }
 }

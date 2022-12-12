@@ -23,4 +23,5 @@
     <string name="btn_watch_escenarios">ESCENARIOS DEPORTIVOS</string>
     <string name="btn_watch_reservar">Reservar</string>
     <string name="txt_search_escenario">Buscar Escenario</string>
+    <string name="title_calendar_reservas">Reservas</string>
 </resources>
