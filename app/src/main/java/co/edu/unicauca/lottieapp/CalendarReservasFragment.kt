@@ -32,19 +32,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
+/*
+Creado por: Kevith Felipe Bastidas, Jefferson Eduardo Campo, Danny Alberto Díaz Mage, Juliana Mora
+ */
 
+/**
+ * Clase de tipo Fragmento en el que se muestran las reservas de cada escenario deportivo
+ */
 class CalendarReservasFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+    //Atributos
     private var _binding: FragmentCalendarReservasBinding? = null
 
     private val binding: FragmentCalendarReservasBinding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private val dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
-
     private val eventos = mutableListOf<eventosResponse>()
-
-    private lateinit var adapter: CalendarAdapter
 
     private val adapt : CalendarAdapter = CalendarAdapter();
 
@@ -69,10 +71,12 @@ class CalendarReservasFragment : Fragment() {
                 buscarEventos(auxresult)
             }
         }
-
-
     }
 
+    /**
+     *  Función para conectarse a la API
+     *  @return la instancia de tipo retrofit para conectarse a la API
+     */
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.URL)
@@ -80,9 +84,12 @@ class CalendarReservasFragment : Fragment() {
     }
 
 
+    /**
+     * Función que me permite obtener los eventos de la API
+     * @param query = parametro que tiene el id del escenario
+     */
     private fun buscarEventos(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-
             val call = getRetrofit().create(APIService::class.java).getHorariosByEscenario("horarios/escenario/${query}")
             activity?.runOnUiThread() {
                 val listaEventos: List<eventosResponse> = call.body() ?: emptyList()
@@ -90,18 +97,7 @@ class CalendarReservasFragment : Fragment() {
                     //Show reclerview
                     eventos.clear()
                     eventos.addAll(listaEventos)
-                    convertToEvent(eventos)
-                    var listaEventos : List<MyEvent> = listOf(MyEvent(
-                        1,
-                        "evento modificado",
-                        toCalendar("2022-12-12T9:00"),
-                        toCalendar("2022-12-12T10:00")
-                    ));
-                    var eventodds: MutableLiveData<List<MyEvent>>? = MutableLiveData()
-                    eventodds?.value = listaEventos
-                    if (eventodds != null) {
-                        viewModel.eventos = eventodds
-                    }
+                    viewModel.eventos.value = convertToEvent(eventos)
                     viewModel.eventos.observe(this@CalendarReservasFragment) {events ->
                         adapt.submitList(events)
                     }
@@ -113,18 +109,40 @@ class CalendarReservasFragment : Fragment() {
         }
     }
 
+    /**
+     * Función que me permite mostrar al usuario si ha ocurrido un error al obtener algun dato de la API
+     */
     private fun showError() {
         Toast.makeText(activity, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
     }
 
-    private fun convertToEvent(eventos: MutableList<eventosResponse>){
-        var eventObj : MyEvent
+    /**
+     * Función que me permite convertir los eventos que llegan de la base de datos a objetos de tipo MyEvent con formato Calendar
+     * @param eventos = lista de eventosresponse obtenidos de la base de datos
+     * @return lista de eventos de tipo MyEvent
+     */
+    private fun convertToEvent(eventos: MutableList<eventosResponse>):MutableList<MyEvent>{
+        var contador: Long = 1;
+        var listaEventos: MutableList<MyEvent> = mutableListOf()
         for (evento in eventos){
-            var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
             var cadenaInicio : Date = formatter.parse(evento.pk_horario.hor_fecha_inicio + "T" + evento.pk_horario.hor_hora_inicio + ":00")
-            var cadenaFin : Date = formatter.parse(evento.pk_horario.hor_fecha_fin + "T" + evento.pk_horario.hor_hora_fin + ":00");
-            println("cadenaInicio "+ cadenaInicio)
-            println("CadenaFin "+cadenaFin)
+            var cadenaFin : Date = formatter.parse(evento.pk_horario.hor_fecha_fin + "T" + evento.pk_horario.hor_hora_fin + ":00")
+            val newEvent = MyEvent(contador,"Evento "+contador,toCalendar(cadenaInicio),toCalendar(cadenaFin))
+            listaEventos.add(newEvent)
+            contador++
         }
+        return listaEventos
+    }
+
+    /**
+     * Función que me permite convertir un tipo de dato Date a Calendar
+     * @param date = parámetro de tipo dato
+     * @return tipo de dato calendario
+     */
+    fun toCalendar(date: Date): Calendar {
+        val cal = Calendar.getInstance()
+        cal.time = date
+        return cal
     }
 }
