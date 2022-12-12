@@ -90,4 +90,9 @@
             android:id="@+id/action_calendarReservasFragment_to_escenarioFragment"
             app:destination="@id/escenarioFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/acercaFragment"
+        android:name="co.edu.unicauca.lottieapp.AcercaFragment"
+        android:label="fragment_acerca"
+        tools:layout="@layout/fragment_acerca" />
 </navigation>
