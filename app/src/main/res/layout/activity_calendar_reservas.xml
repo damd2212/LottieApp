@@ -42,6 +42,7 @@
         app:columnGap="1dp"
         app:eventCornerRadius="4dp"
         app:eventTextColor="@color/white"
+        app:defaultEventColor="@color/primary"
         app:headerBottomLineColor="@color/purple_500"
         app:headerBottomLineWidth="1dp"
         app:headerPadding="12dp"
@@ -69,4 +70,5 @@
         app:timeColumnTextSize="12sp"
         app:todayBackgroundColor="@color/purple_700"
         app:todayHeaderTextColor="@color/purple_700" />
+
 </LinearLayout>

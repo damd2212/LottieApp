@@ -29,6 +29,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CalendarReservasFragment : Fragment() {
@@ -88,13 +90,11 @@ class CalendarReservasFragment : Fragment() {
                     //Show reclerview
                     eventos.clear()
                     eventos.addAll(listaEventos)
-                    for (evento in listaEventos){
-                        println("eventos :"+evento.pk_horario)
-                    }
+                    convertToEvent(eventos)
                     var listaEventos : List<MyEvent> = listOf(MyEvent(
                         1,
                         "evento modificado",
-                        toCalendar("2022-12-12T09:00"),
+                        toCalendar("2022-12-12T9:00"),
                         toCalendar("2022-12-12T10:00")
                     ));
                     var eventodds: MutableLiveData<List<MyEvent>>? = MutableLiveData()
@@ -115,5 +115,16 @@ class CalendarReservasFragment : Fragment() {
 
     private fun showError() {
         Toast.makeText(activity, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun convertToEvent(eventos: MutableList<eventosResponse>){
+        var eventObj : MyEvent
+        for (evento in eventos){
+            var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            var cadenaInicio : Date = formatter.parse(evento.pk_horario.hor_fecha_inicio + "T" + evento.pk_horario.hor_hora_inicio + ":00")
+            var cadenaFin : Date = formatter.parse(evento.pk_horario.hor_fecha_fin + "T" + evento.pk_horario.hor_hora_fin + ":00");
+            println("cadenaInicio "+ cadenaInicio)
+            println("CadenaFin "+cadenaFin)
+        }
     }
 }

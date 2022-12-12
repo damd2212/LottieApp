@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class weekViewModel : ViewModel() {
+
     private var _events = MutableLiveData<List<MyEvent>>();
 
     var eventos: MutableLiveData<List<MyEvent>> = getInicialEvents()

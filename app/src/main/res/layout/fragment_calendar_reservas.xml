@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/purple_500">
-
-        <TextView
-            android:id="@+id/dateRangeTextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="5"
-            android:gravity="center"
-            tools:text="01/01/2018"
-            android:textColor="@color/white"/>
-
-    </LinearLayout>
-
     <com.alamkanak.weekview.WeekView
         android:id="@+id/weekView"
         android:layout_width="match_parent"
@@ -34,7 +13,8 @@
         app:columnGap="1dp"
         app:eventCornerRadius="4dp"
         app:eventTextColor="@color/white"
-        app:headerBottomLineColor="@color/purple_500"
+        app:headerBottomLineColor="@color/gray"
+        app:defaultEventColor="@color/reserve"
         app:headerBottomLineWidth="1dp"
         app:headerPadding="12dp"
         app:headerTextColor="@color/purple_500"
@@ -59,6 +39,6 @@
         app:timeColumnSeparatorStrokeWidth="1dp"
         app:timeColumnTextColor="@color/purple_500"
         app:timeColumnTextSize="12sp"
-        app:todayBackgroundColor="@color/purple_700"
+        app:todayBackgroundColor="@color/unselect"
         app:todayHeaderTextColor="@color/purple_700" />
 </LinearLayout>
