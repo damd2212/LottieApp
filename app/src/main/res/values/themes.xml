@@ -61,6 +61,11 @@
         <item name="android:textColor">@color/blue_light</item>
     </style>
 
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="Theme.LottieApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.LottieApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

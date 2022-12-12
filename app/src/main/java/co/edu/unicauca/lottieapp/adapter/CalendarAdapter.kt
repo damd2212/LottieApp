@@ -1,11 +1,14 @@
 package co.edu.unicauca.calendarweekview.adapter
 
+import android.content.Intent
 import android.widget.Toast
 import co.edu.unicauca.calendarweekview.models.MyEvent
 import co.edu.unicauca.calendarweekview.weekViewModel
+import co.edu.unicauca.lottieapp.HomeActivity
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEntity
 import java.text.SimpleDateFormat
+import co.edu.unicauca.lottieapp.repository.UserRepository
 import java.util.*
 
 class CalendarAdapter() :WeekView.SimpleAdapter<MyEvent>() {
@@ -27,12 +30,13 @@ class CalendarAdapter() :WeekView.SimpleAdapter<MyEvent>() {
     }
 
     override fun onEmptyViewClick(time: Calendar){
-        var formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        var datos4s : Date = formatter.parse("2022-11-25T09:00");
-        var datos4f : Date = formatter.parse("2022-11-25T10:00");
-        val newEvent = MyEvent(6,"Mi reserva",toCalendar(datos4s),toCalendar(datos4f))
-        modelWeek.modifyEvents(MyEvent.events,newEvent);
-        Toast.makeText(this.context,"new Event: "+newEvent.title, Toast.LENGTH_LONG).show()
+        var usuario = UserRepository()
+        if (usuario.getCurrentUser() == null){
+            Toast.makeText(this.context,"No existe una sesion inciada", Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(this.context,"Formualrio en creacion", Toast.LENGTH_LONG).show()
+        }
+
     }
 
     fun toCalendar(date: Date): Calendar {

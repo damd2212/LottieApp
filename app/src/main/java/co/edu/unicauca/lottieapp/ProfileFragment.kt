@@ -30,10 +30,9 @@ class ProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         userRepository.getCurrentUser()?.let {
-            binding.name.isVisible = true
-            binding.name.text = it.email
-            binding.profileFragmentButton.text = "Cerrar Sesión"
-            binding.profileFragmentButton.setOnClickListener {
+            binding.nameProfileFragment.isVisible = true
+            binding.nameProfileFragment.text = it.email
+            binding.logoutFragmentButton.setOnClickListener {
                 userRepository.logout()
                 val intent = Intent(requireContext(),LoginActivity::class.java)
                 startActivity(intent)

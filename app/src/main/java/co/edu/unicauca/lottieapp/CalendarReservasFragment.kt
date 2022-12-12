@@ -73,6 +73,13 @@ class CalendarReservasFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState != null){
+            findNavController().navigate(R.id.locationFragment)
+        }
+    }
+
     /**
      *  Función para conectarse a la API
      *  @return la instancia de tipo retrofit para conectarse a la API
