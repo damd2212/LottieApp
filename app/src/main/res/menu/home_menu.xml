@@ -16,7 +16,7 @@
         android:title="@string/title_toolbar_profile"/>
 
     <item
-        android:id="@+id/aboutFragment"
+        android:id="@+id/acercaFragment"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="@string/label_about"/>
 </menu>

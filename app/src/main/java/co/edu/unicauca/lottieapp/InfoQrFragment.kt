@@ -3,6 +3,7 @@ package co.edu.unicauca.lottieapp
 import android.app.ActionBar
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
@@ -11,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.lottieapp.databinding.FragmentInfoQrBinding
@@ -31,7 +34,7 @@ class InfoQrFragment : Fragment() {
 
     private val binding: FragmentInfoQrBinding get() = _binding!!
 
-    var ayuda: String? = "-1"
+    var ayuda: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,7 @@ class InfoQrFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (savedInstanceState != null){
             findNavController().navigate(R.id.action_infoQrFragment_to_qrFragment)
         }else{
@@ -52,6 +56,16 @@ class InfoQrFragment : Fragment() {
                 val result = bundle.getString("idescenario")
                 searchByID(result)
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.buttonReservaInfoQr.isVisible = false
+        binding.buttonReservaInfoQr.setOnClickListener {
+            setFragmentResult("idescenarioqr", bundleOf("idescenario" to ayuda))
+            findNavController().navigate(R.id.action_infoQrFragment_to_calendarReservasFragment)
+            Toast.makeText(activity,ayuda,Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -83,10 +97,20 @@ class InfoQrFragment : Fragment() {
         if (prmEscenario?.esc_nombre == "-1"){
             binding.titleInfoQr.text = "Escenario no encontrado"
             binding.imageInfoQr.setImageResource(R.drawable.nodisponible)
+
         }else{
+
             binding.imageInfoQr.setImageResource(Imagenes.images[prmEscenario?.esc_nombre].hashCode())
             binding.titleInfoQr.text = prmEscenario?.esc_nombre
-            binding.stateInfoQr.text = prmEscenario?.esc_estado
+            var estado = "ACTIVO"
+            if (prmEscenario?.esc_estado == "0"){
+                estado = "INACTIVO"
+                binding.stateInfoQr.setTextColor(Color.RED)
+            }else{
+                binding.buttonReservaInfoQr.isVisible = true
+                binding.stateInfoQr.setTextColor(Color.GREEN)
+            }
+            binding.stateInfoQr.text = estado
             binding.descriptionInfoQr.text = prmEscenario?.esc_descripcion
         }
     }

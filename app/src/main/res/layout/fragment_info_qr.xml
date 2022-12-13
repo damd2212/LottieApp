@@ -39,6 +39,15 @@
         android:layout_margin="@dimen/margin_info_qr"
         android:textSize="@dimen/size_label_qr"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_reserva_info_qr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/btn_watch_reservar"
+        android:layout_margin="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@+id/description_info_qr"/>
+
 
 
 

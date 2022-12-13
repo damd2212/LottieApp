@@ -71,6 +71,13 @@ class CalendarReservasFragment : Fragment() {
                 buscarEventos(auxresult)
             }
         }
+
+        setFragmentResultListener("idescenarioqr"){requestKey, bundle ->
+            val auxId = bundle.getString("idescenario")!!
+            if(eventos.isEmpty()) {
+                buscarEventos(auxId)
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
