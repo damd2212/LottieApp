@@ -99,7 +99,7 @@ class InfoQrFragment : Fragment() {
             binding.imageInfoQr.setImageResource(R.drawable.nodisponible)
 
         }else{
-            binding.buttonReservaInfoQr.isVisible = true
+
             binding.imageInfoQr.setImageResource(Imagenes.images[prmEscenario?.esc_nombre].hashCode())
             binding.titleInfoQr.text = prmEscenario?.esc_nombre
             var estado = "ACTIVO"
@@ -107,6 +107,7 @@ class InfoQrFragment : Fragment() {
                 estado = "INACTIVO"
                 binding.stateInfoQr.setTextColor(Color.RED)
             }else{
+                binding.buttonReservaInfoQr.isVisible = true
                 binding.stateInfoQr.setTextColor(Color.GREEN)
             }
             binding.stateInfoQr.text = estado
