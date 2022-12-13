@@ -48,7 +48,7 @@ class CalendarReservasFragment : Fragment() {
 
     private val eventos = mutableListOf<eventosResponse>()
 
-    private val adapt : CalendarAdapter = CalendarAdapter();
+    private val adapt : CalendarAdapter = CalendarAdapter(this)
 
     private val viewModel by viewModels<weekViewModel>()
 
@@ -67,6 +67,7 @@ class CalendarReservasFragment : Fragment() {
         weekView.adapter = adapt
         setFragmentResultListener("keyEsc"){ requestKey, bundle ->
             val auxresult = bundle.getString("idescenariores")!!
+            adapt.setAuxVar(auxresult)
             if(eventos.isEmpty()) {
                 buscarEventos(auxresult)
             }

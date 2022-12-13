@@ -93,10 +93,18 @@
         <action
             android:id="@+id/action_calendarReservasFragment_to_escenarioFragment"
             app:destination="@id/escenarioFragment" />
+        <action
+            android:id="@+id/action_calendarReservasFragment_to_formReservaFragment"
+            app:destination="@id/formReservaFragment" />
     </fragment>
     <fragment
         android:id="@+id/acercaFragment"
         android:name="co.edu.unicauca.lottieapp.AcercaFragment"
         android:label="Acerca de nosotros"
         tools:layout="@layout/fragment_acerca" />
+    <fragment
+        android:id="@+id/formReservaFragment"
+        android:name="co.edu.unicauca.lottieapp.FormReservaFragment"
+        android:label="fragment_form_reserva"
+        tools:layout="@layout/fragment_form_reserva" />
 </navigation>
