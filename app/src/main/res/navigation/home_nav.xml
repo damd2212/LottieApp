@@ -92,7 +92,10 @@
         android:label="Calendario de reservas">
         <action
             android:id="@+id/action_calendarReservasFragment_to_escenarioFragment"
-            app:destination="@id/escenarioFragment" />
+            app:destination="@id/escenarioFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/escenarioFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_calendarReservasFragment_to_formReservaFragment"
             app:destination="@id/formReservaFragment" />
@@ -105,6 +108,13 @@
     <fragment
         android:id="@+id/formReservaFragment"
         android:name="co.edu.unicauca.lottieapp.FormReservaFragment"
-        android:label="fragment_form_reserva"
-        tools:layout="@layout/fragment_form_reserva" />
+        android:label="Información de la reserva"
+        tools:layout="@layout/fragment_form_reserva">
+        <action
+            android:id="@+id/action_formReservaFragment_to_calendarReservasFragment"
+            app:destination="@id/calendarReservasFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/calendarReservasFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

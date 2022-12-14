@@ -1,29 +1,20 @@
 package co.edu.unicauca.calendarweekview.adapter
 
-import android.app.Activity
-import android.app.RemoteInput
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.calendarweekview.models.MyEvent
-import co.edu.unicauca.calendarweekview.weekViewModel
 import co.edu.unicauca.lottieapp.*
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEntity
-import java.text.SimpleDateFormat
 import co.edu.unicauca.lottieapp.repository.UserRepository
 import java.util.*
 
 class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEvent>() {
 
     private var calendar: CalendarReservasFragment = par
-    private var modelWeek : weekViewModel = weekViewModel()
     private var auxVar: String = ""
 
     override fun onCreateEntity(item: MyEvent): WeekViewEntity {
@@ -36,8 +27,7 @@ class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEv
     }
 
     override fun onEventClick(data: MyEvent){
-        println("se dio click en el archivo: "+data.title);
-        Toast.makeText(this.context,data.title, Toast.LENGTH_LONG).show()
+        Toast.makeText(this.context,"El horario ya ha sido reservado", Toast.LENGTH_LONG).show()
     }
 
     override fun onEmptyViewClick(time: Calendar){
@@ -52,19 +42,6 @@ class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEv
             calendar.findNavController().navigate(R.id.action_calendarReservasFragment_to_formReservaFragment)
         }
 
-    }
-
-    fun toCalendar(date: Date): Calendar {
-        val cal = Calendar.getInstance()
-        cal.time = date
-        println("formato: "+cal.time);
-        return cal
-    }
-
-    fun recorrerArray(mutableList: MutableList<MyEvent>){
-        for (item in mutableList) {
-            println(item.title)
-        }
     }
 
     fun setAuxVar(parAux: String){
