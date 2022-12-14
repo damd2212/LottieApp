@@ -2,18 +2,20 @@ package co.edu.unicauca.calendarweekview.adapter
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.calendarweekview.models.MyEvent
-import co.edu.unicauca.calendarweekview.weekViewModel
-import co.edu.unicauca.lottieapp.HomeActivity
+import co.edu.unicauca.lottieapp.*
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEntity
-import java.text.SimpleDateFormat
 import co.edu.unicauca.lottieapp.repository.UserRepository
 import java.util.*
 
-class CalendarAdapter() :WeekView.SimpleAdapter<MyEvent>() {
+class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEvent>() {
 
-    private var modelWeek : weekViewModel = weekViewModel()
+    private var calendar: CalendarReservasFragment = par
+    private var auxVar: String = ""
 
     override fun onCreateEntity(item: MyEvent): WeekViewEntity {
         return WeekViewEntity.Event.Builder(item)
@@ -25,31 +27,25 @@ class CalendarAdapter() :WeekView.SimpleAdapter<MyEvent>() {
     }
 
     override fun onEventClick(data: MyEvent){
-        println("se dio click en el archivo: "+data.title);
-        Toast.makeText(this.context,data.title, Toast.LENGTH_LONG).show()
+        Toast.makeText(this.context,"El horario ya ha sido reservado", Toast.LENGTH_LONG).show()
     }
 
     override fun onEmptyViewClick(time: Calendar){
         var usuario = UserRepository()
         if (usuario.getCurrentUser() == null){
-            Toast.makeText(this.context,"No existe una sesion inciada", Toast.LENGTH_LONG).show()
+            val intent = Intent(context,LoginActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }else{
-            Toast.makeText(this.context,"Formualrio en creacion", Toast.LENGTH_LONG).show()
+            calendar.setFragmentResult("keyForm", bundleOf("idEscenarioForm" to this.auxVar))
+            calendar.setFragmentResult("timeForm", bundleOf("time" to time))
+            calendar.findNavController().navigate(R.id.action_calendarReservasFragment_to_formReservaFragment)
         }
 
     }
 
-    fun toCalendar(date: Date): Calendar {
-        val cal = Calendar.getInstance()
-        cal.time = date
-        println("formato: "+cal.time);
-        return cal
-    }
-
-    fun recorrerArray(mutableList: MutableList<MyEvent>){
-        for (item in mutableList) {
-            println(item.title)
-        }
+    fun setAuxVar(parAux: String){
+        this.auxVar = parAux
     }
 
 }

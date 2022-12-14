@@ -1,27 +1,19 @@
 package co.edu.unicauca.lottieapp
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.setFragmentResultListener
 import co.edu.unicauca.calendarweekview.adapter.CalendarAdapter
 import co.edu.unicauca.calendarweekview.weekViewModel
 import co.edu.unicauca.lottieapp.databinding.FragmentCalendarReservasBinding
 import com.alamkanak.weekview.WeekView
-import java.time.format.DateTimeFormatter
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.calendarweekview.models.MyEvent
-import co.edu.unicauca.calendarweekview.models.toCalendar
-import co.edu.unicauca.lottieapp.adapter.EscenarioAdapter
-import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.models.eventosResponse
 import co.edu.unicauca.lottieapp.service.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +32,6 @@ Creado por: Kevith Felipe Bastidas, Jefferson Eduardo Campo, Danny Alberto Díaz
  * Clase de tipo Fragmento en el que se muestran las reservas de cada escenario deportivo
  */
 class CalendarReservasFragment : Fragment() {
-
     //Atributos
     private var _binding: FragmentCalendarReservasBinding? = null
 
@@ -48,7 +39,7 @@ class CalendarReservasFragment : Fragment() {
 
     private val eventos = mutableListOf<eventosResponse>()
 
-    private val adapt : CalendarAdapter = CalendarAdapter();
+    private val adapt : CalendarAdapter = CalendarAdapter(this)
 
     private val viewModel by viewModels<weekViewModel>()
 
@@ -67,6 +58,7 @@ class CalendarReservasFragment : Fragment() {
         weekView.adapter = adapt
         setFragmentResultListener("keyEsc"){ requestKey, bundle ->
             val auxresult = bundle.getString("idescenariores")!!
+            adapt.setAuxVar(auxresult)
             if(eventos.isEmpty()) {
                 buscarEventos(auxresult)
             }
