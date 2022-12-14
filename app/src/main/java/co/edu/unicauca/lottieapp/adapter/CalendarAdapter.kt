@@ -47,8 +47,8 @@ class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEv
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }else{
-            var bundle = bundleOf("timeForm" to time)
             calendar.setFragmentResult("keyForm", bundleOf("idEscenarioForm" to this.auxVar))
+            calendar.setFragmentResult("timeForm", bundleOf("time" to time))
             calendar.findNavController().navigate(R.id.action_calendarReservasFragment_to_formReservaFragment)
         }
 
