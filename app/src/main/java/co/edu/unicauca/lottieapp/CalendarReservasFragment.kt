@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import co.edu.unicauca.calendarweekview.models.MyEvent
 import co.edu.unicauca.lottieapp.models.eventosResponse
 import co.edu.unicauca.lottieapp.service.APIService
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,7 +96,7 @@ class CalendarReservasFragment : Fragment() {
      * @param query = parametro que tiene el id del escenario
      */
     private fun buscarEventos(query: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
             val call = getRetrofit().create(APIService::class.java).getHorariosByEscenario("horarios/escenario/${query}")
             activity?.runOnUiThread() {
                 val listaEventos: List<eventosResponse> = call.body() ?: emptyList()
@@ -112,6 +113,12 @@ class CalendarReservasFragment : Fragment() {
                     showError()
                 }
             }
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        activity?.runOnUiThread {
+            Toast.makeText(activity,"Servidor no encontrado: " + exception,Toast.LENGTH_LONG).show()
         }
     }
 

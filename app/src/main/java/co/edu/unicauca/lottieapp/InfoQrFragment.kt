@@ -21,6 +21,7 @@ import co.edu.unicauca.lottieapp.databinding.FragmentInfoQrBinding
 import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.service.APIService
 import co.edu.unicauca.lottieapp.service.Imagenes
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -76,7 +77,7 @@ class InfoQrFragment : Fragment() {
 
     private fun searchByID(query:String?){
 
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
             val call = getRetrofit().create(APIService::class.java).getEscenariosByID("escenarios/$query")
             val escenario = call.body()
             getActivity()?.runOnUiThread {
@@ -91,6 +92,12 @@ class InfoQrFragment : Fragment() {
 
         }
 
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        activity?.runOnUiThread {
+            Toast.makeText(activity,"Servidor no encontrado: " + exception,Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun imprimirDatos( prmEscenario : escenarioResponse?){

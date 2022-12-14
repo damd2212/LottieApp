@@ -18,6 +18,7 @@ import co.edu.unicauca.lottieapp.models.categoriaResponse
 import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.service.APIService
 import com.google.android.material.internal.ViewUtils
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -109,7 +110,7 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
     }
 
     private fun searchByID(query: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
             activity?.runOnUiThread(){
                 if(!escenarios.isEmpty()){
                     val listaEscenarios = escenarios.filter { it.esc_nombre.startsWith(query)}
@@ -118,6 +119,12 @@ class EscenarioFragment : Fragment(), SearchView.OnQueryTextListener,EscenarioAd
                 }
             }
 
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        activity?.runOnUiThread {
+            Toast.makeText(activity,"Servidor no encontrado: " + exception,Toast.LENGTH_LONG).show()
         }
     }
 

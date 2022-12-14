@@ -22,6 +22,7 @@ import co.edu.unicauca.lottieapp.models.categoriaResponse
 import co.edu.unicauca.lottieapp.models.escenarioResponse
 import co.edu.unicauca.lottieapp.service.APIService
 import com.google.android.material.internal.ViewUtils
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,7 +81,7 @@ class LocationFragment : Fragment(),OnQueryTextListener,CategoriaAdapter.OnUserC
     }
 
     private fun searchCategorias(){
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO).launch(coroutineExceptionHandler) {
 
             val call = getRetrofit().create(APIService::class.java).getCategorias("categorias")
             activity?.runOnUiThread(){
@@ -95,6 +96,12 @@ class LocationFragment : Fragment(),OnQueryTextListener,CategoriaAdapter.OnUserC
                     showError()
                 }
             }
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        activity?.runOnUiThread {
+            Toast.makeText(activity,"Servidor no encontrado: " + exception,Toast.LENGTH_LONG).show()
         }
     }
 
