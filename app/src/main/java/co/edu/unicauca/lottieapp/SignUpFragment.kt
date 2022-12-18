@@ -46,18 +46,29 @@ class SignUpFragment : Fragment() {
                 binding.signupPasswordLayout.error = null
             }
             if (binding.signupEmail.text.toString().isValidEmail() && binding.signupPassword.text.toString().isValidPassword()){
-                lifecycleScope.launch {
-                    val result = userRepository.createUser(binding.signupName.text.toString(),binding.signupEmail.text.toString(), binding.signupRadioGroup.checkedRadioButtonId.toString(), binding.signupPassword.text.toString())
-                    when(result){
-                        is Resource.Error -> Toast.makeText(requireContext(),"Error ${result.message}", Toast.LENGTH_LONG).show()
-                        is Resource.Loading -> {}
-                        is Resource.Success -> {
-                            val intent = Intent(requireContext(),HomeActivity::class.java)
-                            startActivity(intent)
-                            requireActivity().finish()
-                        }
-                    }
+                lifecycleScope.launch{
+                    val result = userRepository.createUser(binding.signupEmail.text.toString(),binding.signupPassword.text.toString(),binding.signupName.text.toString(),binding.signupCod.text.toString(),binding.signupId.text.toString())
+                    println(result)
+
+                    val intent = Intent(requireContext(),HomeActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+
+
+
                 }
+
+
+//                lifecycleScope.launch {
+//                    val result = userRepository.createUser(binding.signupName.text.toString(),binding.signupEmail.text.toString(), binding.signupRadioGroup.checkedRadioButtonId.toString(), binding.signupPassword.text.toString())
+//                    when(result){
+//                        is Resource.Error -> Toast.makeText(requireContext(),"Error ${result.message}", Toast.LENGTH_LONG).show()
+//                        is Resource.Loading -> {}
+//                        is Resource.Success -> {
+//
+//                        }
+//                    }
+//                }
             }
         }
 
