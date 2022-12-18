@@ -16,6 +16,7 @@ class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEv
 
     private var calendar: CalendarReservasFragment = par
     private var auxVar: String = ""
+    //private val userRepository by lazy { UserRepository() }
 
     override fun onCreateEntity(item: MyEvent): WeekViewEntity {
         return WeekViewEntity.Event.Builder(item)
@@ -32,7 +33,7 @@ class CalendarAdapter(par:CalendarReservasFragment) :WeekView.SimpleAdapter<MyEv
 
     override fun onEmptyViewClick(time: Calendar){
         var usuario = UserRepository()
-        if (usuario.getCurrentUser() == null){
+        if (usuario.getUsuario() == null){
             val intent = Intent(context,LoginActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)

@@ -84,40 +84,45 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioGroup
-                android:id="@+id/signup_radio_group"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_name_layout"
-                android:layout_marginVertical="@dimen/default_margin"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_id_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                app:layout_constraintTop_toBottomOf="@id/signup_name_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:hint="@string/text_id_sing_up"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/signup_male_radio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/radio_label_m"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    />
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/signup_female_radio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/radio_label_f"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/signup_another_radio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/radio_label_o"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/signup_cod_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/signup_id_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="@dimen/default_margin"
+                android:hint="@string/cod_signup"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            </RadioGroup>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signup_cod"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    />
 
-
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
