@@ -36,29 +36,7 @@ class SignUpFragment : Fragment() {
         super.onStart()
         binding.fragmentSignupButton.setOnClickListener {
 
-            if (!binding.signupEmail.text.toString().isValidEmail()){
-                binding.signupEmailLayout.error = getString(R.string.email_error)
-            }else{
-                binding.signupEmailLayout.error = null
-            }
-
-            if (!binding.signupPassword.text.toString().isValidPassword()){
-                binding.signupPasswordLayout.error = getString(R.string.password_error)
-            }else{
-                binding.signupPasswordLayout.error = null
-            }
-            if (binding.signupEmail.text.toString().isValidEmail() && binding.signupPassword.text.toString().isValidPassword()){
-                lifecycleScope.launch{
-                    val result = userRepository.createUser(binding.signupEmail.text.toString(),binding.signupPassword.text.toString(),binding.signupName.text.toString(),binding.signupCod.text.toString(),binding.signupId.text.toString())
-                    println(result)
-
-                    val intent = Intent(requireContext(), HomeActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
-
-
-
-                }
+            
 
 
 //                lifecycleScope.launch {
