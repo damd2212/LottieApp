@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".CalendarReservasActivity"
+            android:name=".ui.activities.CalendarReservasActivity"
             android:exported="false"
             android:theme="@style/Theme.LottieApp.NoActionBar">
             <meta-data
@@ -30,7 +30,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.LottieApp.NoActionBar"
             android:screenOrientation="portrait">
@@ -39,7 +39,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.LottieApp.NoActionBar"
             android:screenOrientation="portrait">
@@ -48,7 +48,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.LottieApp.NoActionBar"

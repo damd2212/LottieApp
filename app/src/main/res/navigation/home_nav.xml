@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/locationFragment"
-        android:name="co.edu.unicauca.lottieapp.LocationFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.LocationFragment"
         android:label="@string/title_toolbar_home"
         tools:layout="@layout/fragment_location" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="co.edu.unicauca.lottieapp.SearchFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.SearchFragment"
         android:label="@string/title_toolbar_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/qrFragment"
-        android:name="co.edu.unicauca.lottieapp.QrFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.QrFragment"
         android:label="@string/title_toolbar_qr"
         tools:layout="@layout/fragment_qr" >
         <action
@@ -39,12 +39,12 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="co.edu.unicauca.lottieapp.ProfileFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.ProfileFragment"
         android:label="@string/title_toolbar_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/infoQrFragment"
-        android:name="co.edu.unicauca.lottieapp.InfoQrFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.InfoQrFragment"
         android:label="Informacion de la busqueda"
         tools:layout="@layout/fragment_info_qr">
         <action
@@ -57,14 +57,14 @@
     </fragment>
     <fragment
         android:id="@+id/escenarioFragment"
-        android:name="co.edu.unicauca.lottieapp.EscenarioFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.EscenarioFragment"
         android:label="Escenarios">
         <action
             android:id="@+id/action_escenarioFragment_to_infoEscenarioFragment"
             app:destination="@id/infoEscenarioFragment" />
         <argument
             android:name="ubicacion"
-            app:argType="co.edu.unicauca.lottieapp.models.categoriaResponse" />
+            app:argType="co.edu.unicauca.lottieapp.data.model.categoriaResponse" />
         <argument
             android:name="name"
             app:argType="string" />
@@ -74,21 +74,21 @@
     </fragment>
     <fragment
         android:id="@+id/infoCategoriaFragment"
-        android:name="co.edu.unicauca.lottieapp.InfoCategoriaFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.InfoCategoriaFragment"
         android:label="Información Ubicación"
         tools:layout="@layout/fragment_info_categoria">
         <argument
             android:name="categoria"
-            app:argType="co.edu.unicauca.lottieapp.models.categoriaResponse" />
+            app:argType="co.edu.unicauca.lottieapp.data.model.categoriaResponse" />
     </fragment>
     <fragment
         android:id="@+id/infoEscenarioFragment"
-        android:name="co.edu.unicauca.lottieapp.InfoEscenarioFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.InfoEscenarioFragment"
         android:label="Información Escenario"
         tools:layout="@layout/fragment_info_escenario" />
     <fragment
         android:id="@+id/calendarReservasFragment"
-        android:name="co.edu.unicauca.lottieapp.CalendarReservasFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.CalendarReservasFragment"
         android:label="Calendario de reservas">
         <action
             android:id="@+id/action_calendarReservasFragment_to_escenarioFragment"
@@ -102,12 +102,12 @@
     </fragment>
     <fragment
         android:id="@+id/acercaFragment"
-        android:name="co.edu.unicauca.lottieapp.AcercaFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.AcercaFragment"
         android:label="Acerca de nosotros"
         tools:layout="@layout/fragment_acerca" />
     <fragment
         android:id="@+id/formReservaFragment"
-        android:name="co.edu.unicauca.lottieapp.FormReservaFragment"
+        android:name="co.edu.unicauca.lottieapp.ui.fragments.FormReservaFragment"
         android:label="Información de la reserva"
         tools:layout="@layout/fragment_form_reserva">
         <action
