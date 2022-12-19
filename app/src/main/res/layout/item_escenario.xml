@@ -18,15 +18,16 @@
             android:layout_height="70dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/icon_escenarios"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/ic_baseline_share_location_24"
+                android:src="@drawable/ic_baseline_sports_volleyball_24"
                 android:background="@color/icon_card"
+                app:shapeAppearanceOverlay="@style/circleImageView"
                 />
 
             <LinearLayout
